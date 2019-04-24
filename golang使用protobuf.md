@@ -66,3 +66,32 @@ message BookStore {
     repeated hello.protobuf.Book bookList = 1;
 }
 ```
+#### Map类型
+proto3支持map类型声明:
+```
+map<key_type, value_type> map_field = N;
+
+message Project {...}
+map<string, Project> projects = 1;
+```
+- 键、值类型可以是内置的标量类型，也可以是自定义`message`类型
+- 字段不支持`repeated`属性
+
+### 基本规范
+描述文件以`.proto`做为文件后缀，除结构定义外的语句以分号结尾
+#### 结构定义包括：`message、service、enum`
+rpc方法定义结尾的分号可有可无
+
+`message`命名采用驼峰命名方式，字段命名采用小写字母加下划线分隔方式
+```
+message SongServerRequest {
+    required string song_name = 1;
+}
+```
+`enum`命名也采用驼峰命名方式，字段命名采用大写字母加下划线分隔方式
+```
+enum Foo {
+    FIRST_VALUE = 1;
+    SECOND_VALUE = 2;
+}
+```
