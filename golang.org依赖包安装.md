@@ -4,5 +4,6 @@
 ```
 go get github.com/golang/net
 go get github.com/golang/tools
+go get github.com/golang/crypto
 ```
 将`github.com/golang/net`目录下文件移动到`golang.org/x/net`
