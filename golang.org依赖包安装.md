@@ -5,5 +5,10 @@
 go get github.com/golang/net
 go get github.com/golang/tools
 go get github.com/golang/crypto
+go get github.com/golang/sys
+go get github.com/golang/text
+go get github.com/golang/lint
+go get github.com/golang/exp
+go get github.com/golang/perf
 ```
 将`github.com/golang/net`目录下文件移动到`golang.org/x/net`
