@@ -10,5 +10,13 @@ go get github.com/golang/text
 go get github.com/golang/lint
 go get github.com/golang/exp
 go get github.com/golang/perf
+
+mv $GOPATH/src/github.com/golang/net $GOPATH/src/golang.org/x/net
+mv $GOPATH/src/github.com/golang/tools $GOPATH/src/golang.org/x/tools
+mv $GOPATH/src/github.com/golang/crypto $GOPATH/src/golang.org/x/crypto
+mv $GOPATH/src/github.com/golang/sys $GOPATH/src/golang.org/x/sys
+mv $GOPATH/src/github.com/golang/text $GOPATH/src/golang.org/x/text
+mv $GOPATH/src/github.com/golang/exp $GOPATH/src/golang.org/x/exp
+mv $GOPATH/src/github.com/golang/perf $GOPATH/src/golang.org/x/perf
 ```
-将`github.com/golang/net`目录下文件移动到`golang.org/x/net`
+
