@@ -6,6 +6,7 @@ go get github.com/golang/net
 go get github.com/golang/tools
 go get github.com/golang/crypto
 go get github.com/golang/sys
+go get github.com/golang/sync
 go get github.com/golang/text
 go get github.com/golang/time
 go get github.com/golang/lint
@@ -16,6 +17,7 @@ mv $GOPATH/src/github.com/golang/net $GOPATH/src/golang.org/x/net
 mv $GOPATH/src/github.com/golang/tools $GOPATH/src/golang.org/x/tools
 mv $GOPATH/src/github.com/golang/crypto $GOPATH/src/golang.org/x/crypto
 mv $GOPATH/src/github.com/golang/sys $GOPATH/src/golang.org/x/sys
+mv $GOPATH/src/github.com/golang/sync $GOPATH/src/golang.org/x/sync
 mv $GOPATH/src/github.com/golang/text $GOPATH/src/golang.org/x/text
 mv $GOPATH/src/github.com/golang/time $GOPATH/src/golang.org/x/time
 mv $GOPATH/src/github.com/golang/lint $GOPATH/src/golang.org/x/lint
