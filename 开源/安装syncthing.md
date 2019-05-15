@@ -61,6 +61,8 @@ $ go run build.go
 [FOWNB] 12:38:32 INFO: GUI and API listening on 127.0.0.1:8384
 [FOWNB] 12:38:32 INFO: Access the GUI via the following URL: http://127.0.0.1:8384/
 ```
+![syncthing01](../img/syncthing/syncthing01.png)
+
 #### 配置
 ```
 [root@dockerMaster ~]# ls ~/.config/syncthing/
@@ -78,3 +80,33 @@ cert.pem  config.xml  https-cert.pem  https-key.pem  index-v0.14.0.db  key.pem
 ```
 将`127.0.0.1:8384`改为`0.0.0.0:8384`,重启`syncthing`
 
+![syncthing02](../img/syncthing/syncthing02.png)
+
+#### 开放端口
+```
+iptables -A INPUT -p tcp --dport 8384 -j ACCEPT
+
+iptables -A OUTPUT -p tcp --sport 8384 -j ACCEPT
+
+iptables -A INPUT -p tcp --dport 22067 -j ACCEPT
+
+iptables -A OUTPUT -p tcp --sport 22067 -j ACCEPT
+
+iptables -A INPUT -p tcp --dport 22000 -j ACCEPT
+
+iptables -A OUTPUT -p tcp --sport 22000 -j ACCEPT
+
+service iptables save
+#重启iptables
+systemctl restart iptables
+```
+
+![syncthing03](../img/syncthing/syncthing03.png)
+
+![syncthing04](../img/syncthing/syncthing04.png)
+
+![syncthing05](../img/syncthing/syncthing05.png)
+
+![syncthing06](../img/syncthing/syncthing06.png)
+
+![syncthing07](../img/syncthing/syncthing07.png)
