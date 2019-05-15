@@ -2,7 +2,7 @@
 
 > Syncthing is a continuous file synchronization program. It synchronizes files between two or more computers. 
 
-#### Linux 编译安装
+#### 1.1 Linux 编译安装
 ```
 # This should output "go version go1.12" or higher.
 $ go version
@@ -20,7 +20,7 @@ $ cd syncthing
 # You should be inside ~/dev/syncthing right now.
 $ go run build.go
 ```
-#### windows编译安装
+#### 1.2 windows编译安装
 ```
 # This should output "go version go1.12" or higher.
 > go version
@@ -34,7 +34,7 @@ $ go run build.go
 ```
 编译后可执行文件`syncthing`在`bin`目录
 
-#### 启动
+#### 2. 启动syncthing
 ```
 [root@dockerMaster syncthing]# ./bin/syncthing
 [monitor] 12:38:31 INFO: Starting syncthing
@@ -63,7 +63,7 @@ $ go run build.go
 ```
 ![syncthing01](../img/syncthing/syncthing01.png)
 
-#### 配置
+#### 3. 配置syncthing
 ```
 [root@dockerMaster ~]# ls ~/.config/syncthing/
 cert.pem  config.xml  https-cert.pem  https-key.pem  index-v0.14.0.db  key.pem
@@ -82,7 +82,7 @@ cert.pem  config.xml  https-cert.pem  https-key.pem  index-v0.14.0.db  key.pem
 
 ![syncthing02](../img/syncthing/syncthing02.png)
 
-#### 开放端口
+#### 4. 开放端口
 ```
 iptables -A INPUT -p tcp --dport 8384 -j ACCEPT
 
@@ -100,13 +100,19 @@ service iptables save
 #重启iptables
 systemctl restart iptables
 ```
-
+#### 5. 共享文件
+#### 5.1 显示设备标识
+`右上角的操作 -> 显示ID`
 ![syncthing03](../img/syncthing/syncthing03.png)
 
+#### 5.2 添加远程设备
 ![syncthing04](../img/syncthing/syncthing04.png)
 
+#### 5.3 接受远程设备连接
 ![syncthing05](../img/syncthing/syncthing05.png)
 
+#### 5.4 共享文件夹给远程
 ![syncthing06](../img/syncthing/syncthing06.png)
 
+#### 5.5 查看同步状态
 ![syncthing07](../img/syncthing/syncthing07.png)
