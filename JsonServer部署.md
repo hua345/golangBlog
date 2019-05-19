@@ -36,7 +36,19 @@ cnpm install -g json-server
   Type s + enter at any time to create a snapshot of the database
   Watching...
 ```
-#### 请求
+#### 路由
+```
+# Route
+GET    /posts
+GET    /posts/1
+POST   /posts
+PUT    /posts/1
+PATCH  /posts/1
+DELETE /posts/1
+
+# Database
+GET /db
+```
 ```
 ➜  ~ curl http://localhost:3000/posts/1
 {
@@ -60,4 +72,59 @@ cnpm install -g json-server
   "title": "json api",
   "author": "fangfang"
 }
+➜  ~ curl 127.0.0.1:3000/posts
+{
+  "code": 200,
+  "msg": "success",
+  "data": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    },
+    {
+      "id": 2,
+      "title": "json api",
+      "author": "fangfang"
+    }
+  ]
+}
+```
+#### 编辑`server.js`
+```
+const jsonServer = require('json-server')
+const server = jsonServer.create()
+const router = jsonServer.router('db.json')
+const middlewares = jsonServer.defaults()
+
+const hostname = '0.0.0.0'
+const port = 3000
+const apiRoute = '/api/v1'
+
+// Set default middlewares (logger, static, cors and no-cache)
+server.use(middlewares)
+
+// Add custom routes before JSON Server router
+server.get('/echo', (req, res) => {
+    res.jsonp(req.query)
+})
+
+// To handle POST, PUT and PATCH you need to use a body-parser
+// You can use the one used by JSON Server
+server.use(jsonServer.bodyParser)
+
+router.render = (req, res) => {
+    res.jsonp({
+        code: 200,
+        msg: 'success',
+        data: res.locals.data
+    })
+}
+
+// Use default router
+server.use(apiRoute, router)
+server.listen(port, hostname, () => {
+    console.log(`JSON Server running at http://${hostname}:${port}/`);
+    console.log(`Api Path http://${hostname}:${port}${apiRoute}`);
+})
 ```
