@@ -20,7 +20,7 @@ go version go1.6.2 linux/amd64
 $ echo $GOPATH
 /home/chenjianhua/gocode:/home/chenjianhua/myGolang
 $ cd /home/chenjianhua/myGolang/src
-$ git clone git@github.com:coreos/etcd.git
+$ git clone https://github.com/etcd-io/etcd.git 
 $ cd etcd
 $ ./build
 ```
