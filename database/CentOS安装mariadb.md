@@ -3,6 +3,7 @@ mariadb是mysql的一个分支,主要由开源社区在维护，采用GPL授权�
 #yum install mysql或mariadb后，无法连接数据库
 ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/var/lib/mysql/mysql.sock' (2)
 ```
+#### 1.安装mariadb
 ```
 yum -y install mariadb*
 正在安装:
@@ -12,13 +13,13 @@ yum -y install mariadb*
  mariadb-server             x86_64     1:5.5.44-1.el7_1       updates      11 M
  mariadb-test               x86_64     1:5.5.44-1.el7_1       updates     8.0 M
 ```
-### 启动mariadb
+#### 2.启动mariadb
 ```
 systemctl start mariadb.service  
 #开机自启动
 systemctl enable mariadb.service 
 ```
-### 设置root密码 
+#### 3.设置root密码 
 ```
 mysql_secure_installation
 #连接mysql
