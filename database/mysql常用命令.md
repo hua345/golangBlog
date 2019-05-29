@@ -51,7 +51,7 @@ MariaDB [(none)]> select host,user,password from mysql.user;
 +-----------+------------+-------------------------------------------+
 5 rows in set (0.00 sec)
 ```
-### 3.表操作
+### 4.表操作
 ```
 //查看数据库所有表
 show tables
@@ -68,7 +68,7 @@ drop table Books;
 //清空表
 delete from Books;
 ```
-#### 4. CURD
+#### 5. CURD
 ```
 //create
 insert into Books (bookName) values("Primer C++"),("深入浅出Nodejs");
@@ -79,7 +79,7 @@ select * from Books where bookId <= 10  order by bookDate asc;
 //delete
 delete from Books where bookName='Primer C++ 5th';
 ```
-### 5. 备份数据库
+### 6. 备份数据库
 ```
 //备份整个数据库
 mysqldump -u user_name -p database_name > outfile_name.sql
