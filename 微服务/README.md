@@ -1,0 +1,2 @@
+- [今日头条Go建千亿级微服务的实践](https://www.jianshu.com/p/ea9ab1b67dce)
+- [Go使用grpc+http打造高性能微服务](https://blog.csdn.net/RA681t58CJxsgCkJ31/article/details/78601747)

@@ -1,7 +1,7 @@
 由于学校网络限制，很多时候下载不了nodejs库,我们选择访问方便的镜像库。
 1.临时指定镜像源:
 ```
-npm install <registry-name> --registry https://registry.npmjs.org
+npm install <registry-name> --registry https://registry.npm.taobao.org
 ```
 2.永久设置:
 ```
