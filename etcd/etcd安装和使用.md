@@ -3,16 +3,16 @@
 >分布式系统中的数据分为控制数据和应用数据。
 使用etcd的场景默认处理的数据都是控制数据，对于应用数据，只推荐数据量很小，但是更新访问频繁的情况。
 
-#### 1.etcd的特性如下：
+#### 1.etcd的特性如下
+
 - 简单: curl可访问的用户的API（HTTP+JSON）
 - 安全: 可选的SSL客户端证书认证
 - 快速: 单实例每秒 1000 次写操作
 - 可靠: 使用Raft保证一致性
 
-
-
 ### 2.[源码编译](https://github.com/coreos/etcd)
-```
+
+```bash
 # go is required
 $ go version
 go version go1.6.2 linux/amd64
@@ -24,8 +24,10 @@ $ git clone https://github.com/etcd-io/etcd.git
 $ cd etcd
 $ ./build
 ```
-####  3.运行服务和简单`Key Value`操作
-```
+
+### 3.运行服务和简单`Key Value`操作
+
+```bash
 $ ./bin/etcd
 
 #etcdctl
@@ -46,17 +48,23 @@ $ hello
 $ ./bin/etcdctl del msg
 # 1
 ```
+
 ### 4.`watch`监听
+
 `watch`后`etcdctl`阻塞，当另一个终端监听的值改变时，`watch`触发
-```
+
+```bash
 $ etcdctl watch event1
 # PUT
 # event1
 # hello
 ```
+
 ### 5.`lease`租约
+
 etcd也能为`key`设置超时时间，但与`redis`不同，需要先创建`lease`，然后使用put命令加上参数`--lease=<lease ID>来设置
-```
+
+```bash
 # 创建lease
 $ etcdctl lease grant 1000
 $ lease 694d6280d047720f granted with TTL(1000s)
@@ -77,10 +85,11 @@ $ lease 694d6280d047720f granted with TTL(1000s), remaining(755s), attached keys
 $ etcdctl lease keep-alive 694d6280d047720f
 $ lease 694d6280d047720f keepalived with TTL(1000)
 
-# 删除lease，并删除所有关联的key 
+# 删除lease，并删除所有关联的key
 $ etcdctl lease revoke 694d6280d047720f
 $ lease 694d6280d047720f revoked
 
 
 ```
+
 #### 参考:[etcd：从应用场景到实现原理的全方位解读](http://www.infoq.com/cn/articles/etcd-interpretation-application-scenario-implement-principle)
