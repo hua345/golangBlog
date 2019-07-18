@@ -58,6 +58,8 @@ $ etcdctl watch event1
 # PUT
 # event1
 # hello
+# DELETE
+# event1
 ```
 
 ### 5.`lease`租约
@@ -88,7 +90,6 @@ $ lease 694d6280d047720f keepalived with TTL(1000)
 # 删除lease，并删除所有关联的key
 $ etcdctl lease revoke 694d6280d047720f
 $ lease 694d6280d047720f revoked
-
 
 ```
 

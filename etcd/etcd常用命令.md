@@ -11,22 +11,23 @@
 b6e653038eeb4204, started, etcd02, http://192.168.137.128:22380, http://127.0.0.1:22379,http://192.168.137.128:22379
 ```
 
-## put command to write
+## 键值对命令
 
 ```bash
-etcdctl put foo "Hello World!"
+# `put`设置key
+etcdctl put foo 'Hello World'
 
-```
-
-## get to read from etcd
-
-```bash
+# `get`取得key
 etcdctl get foo
 etcdctl --write-out="json" get foo
 {"header":{"cluster_id":8144621041877720777,"member_id":5025925290928334777,"revision":29,"raft_term":2}}
+
+# `del`删除key
+➜  ~ etcdctl del foo
+1
 ```
 
-## Get by prefix
+## 通过Key前缀获取Key
 
 ```bash
 etcdctl put web1 value1
@@ -44,9 +45,52 @@ value3
 {"header":{"cluster_id":8144621041877720777,"member_id":5025925290928334777,"revision":29,"raft_term":2},"kvs":[{"key":"d2ViMQ==","create_revision":2,"mod_revision":5,"version":2,"value":"dmFsdWUx"},{"key":"d2ViMg==","create_revision":3,"mod_revision":6,"version":2,"value":"dmFsdWUy"},{"key":"d2ViMw==","create_revision":4,"mod_revision":7,"version":2,"value":"dmFsdWUz"}],"count":3}
 ```
 
-## Watch
+## txn事务
 
-watch to get notified of future changes:
+`txn` to wrap multiple requests into one transaction:
+
+```go
+var Compare_CompareTarget_name = map[int32]string{
+    0: "VERSION",
+    1: "CREATE",
+    2: "MOD",
+    3: "VALUE",
+    4: "LEASE",
+}
+```
+
+```bash
+➜  ~ etcdctl put user1 bad
+OK
+➜  ~ etcdctl txn -i
+compares:
+value("user1") = "bad"
+
+success requests (get, put, del):
+del user1
+
+failure requests (get, put, del):
+put user1 good
+
+SUCCESS
+
+1
+➜  ~ etcdctl get user1 -w="json"
+{"header":{"cluster_id":8144621041877720777,"member_id":5025925290928334777,"revision":4083,"raft_term":10},"kvs":[{"key":"dXNlcjE=","create_revision":4081,"mod_revision":4081,"version":1,"value":"Z29vZA=="}],"count":1}
+➜  ~ etcdctl txn -i
+compares:
+create("user1") = "4081"
+
+success requests (get, put, del):
+
+failure requests (get, put, del):
+
+SUCCESS
+```
+
+## watch监听Key的变化
+
+`watch` to get notified of future changes:
 
 ```bash
 ➜  ~ etcdctl watch stock1
@@ -83,9 +127,9 @@ stock2
 200
 ```
 
-## Lease
+## lease租约
 
-lease to write with TTL:
+`lease` to write with TTL:
 
 ```bash
 ➜  ~ etcdctl lease grant 100
@@ -108,9 +152,9 @@ lease 67b96bd7a874305b revoked
 
 ```
 
-## Distributed locks
+## lock分布式锁
 
-lock for distributed lock:
+`lock` for distributed lock:
 
 ```bash
 ➜  ~ etcdctl lock mutex1
@@ -120,7 +164,7 @@ mutex1/67b96bd7a8743061
 ➜  ~ etcdctl lock mutex1
 ```
 
-## Elections
+## 选举
 
 elect for leader election:
 
