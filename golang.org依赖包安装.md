@@ -1,13 +1,16 @@
 #### 由于网络原因
-```
+
+```bash
 #google.golang.org/grpc
 git clone https://github.com/grpc/grpc-go.git $GOPATH/src/google.golang.org/grpc
 #google.golang.org/genproto
 git clone https://github.com/google/go-genproto.git $GOPATH/src/google.golang.org/genproto
 ```
+
 无法下载`https://golang.org/x/net`依赖包
 `golang`在github上有对应的镜像库
-```
+
+```bash
 go get github.com/golang/net
 go get github.com/golang/tools
 go get github.com/golang/crypto
@@ -30,4 +33,3 @@ mv $GOPATH/src/github.com/golang/lint $GOPATH/src/golang.org/x/lint
 mv $GOPATH/src/github.com/golang/exp $GOPATH/src/golang.org/x/exp
 mv $GOPATH/src/github.com/golang/perf $GOPATH/src/golang.org/x/perf
 ```
-
