@@ -1,63 +1,46 @@
-#### 参考
-- [Golang环境安装和依赖管理](https://www.jianshu.com/p/80b52e054c35)
-#### Vendor
-> `Golang1.5`加入了一个试验性的`vendor`文件夹机制`(vendor：供应商/小贩)`。
-从`Golang1.6`正式开启这个功能。`vendor`机制就是在项目中加入了vendor文件夹，用于存放依赖，这样就可以将不同项目的依赖隔离开。
-当使用`go run`或者`go build`命令时，会首先从当前路径下的`vendor`文件夹中查找依赖，如果`vendor`不存在，才会从`GOPATH`中查找依赖。
-然而我们安装依赖通常使用`go get`或者`go install`命令，这两个命令依旧会把依赖安装到`GOPATH`路径下。
-#### go mod/Go1.11以后
-> `Golang 1.11` 开始， 实验性出现了可以不用定义`GOPATH`的功能，且官方有`go mod`支持。`Golang 1.12`更是将此特征正式化。
+# 包管理工具dep
 
-现在用 Golang1.12 进行
-```
-$ go mod init
-go: modules disabled inside GOPATH/src by GO111MODULE=auto; see 'go help modules'
-```
-其中`GO111MODULE=auto`是一个开关，开启或关闭模块支持，它有三个可选值：`off/on/auto`，默认值是`auto`。
-- `GO111MODULE=off`,不使用`go Module`支持，通过`vendor`文件夹和`GOPATH`寻找依赖包。现在可以称为`GOPATH mode`。
-- `GO111MODULE=on`,要求使用`go Module`支持,忽略`GOPATH`和`vendor`文件夹，只根据`go.mod`文件下载依赖。
-- `GO111MODULE=auto`，该项目在`GOPATH src`外面且根目录有`go.mod`文件时，开启模块支持。
-在使用模块的时候，`GOPATH`是无意义的，不过它还是会把下载的依赖储存在`GOPATH/src`中，也会把`go install`的结果放在 GOPATH/bin（如果 GOBIN 不存在的话）
-我们将项目移出`GOPATH`，然后:
-```
-$ go mod init
-go: creating new go.mod: module github.com/hua345/generateCode
-```
-将会生成`go.mod`文件
-```
-module github.com/hua345/generateCode
-
-go 1.12
-```
-#### 包管理工具dep
 `Vendor`只是go官方提供的一个机制，但是包管理的问题依然没有解决，并且也没有对依赖进行版本管理。如果要实现上述的功能，还需要借助包管理工具。
 
 https://github.com/golang/go/wiki/PackageManagementTools
 https://github.com/golang/dep
 
+## dep源码安装
+
+```bash
+go get -d -u github.com/golang/dep
+cd $(go env GOPATH)/src/github.com/golang/dep
+DEP_LATEST=$(git describe --abbrev=0 --tags)
+git checkout $DEP_LATEST
+go install -ldflags="-X main.version=$DEP_LATEST" ./cmd/dep
+git checkout master
 ```
-go get -u github.com/golang/dep/cmd/dep
+
+## 查看帮助
+
+```bash
+$ dep -h
+Dep is a tool for managing dependencies for Go projects
+
+Usage: "dep [command]"
+
+Commands:
+
+  init     Set up a new Go project, or migrate an existing one
+  status   Report the status of the project's dependencies
+  ensure   Ensure a dependency is safely vendored in the project
+  version  Show the dep version information
+  check    Check if imports, Gopkg.toml, and Gopkg.lock are in sync
+
+Examples:
+  dep init                               set up a new project
+  dep ensure                             install the project's dependencies
+  dep ensure -update                     update the locked versions of all dependencies
+  dep ensure -add github.com/pkg/errors  add a dependency to the project
+
+Use "dep help [command]" for more information about a command.
 ```
-```
-go get github.com/tools/godep
 
-$ godep help
-Godep is a tool for managing Go package dependencies.
+## 参考
 
-Usage:
-
-        godep command [arguments]
-
-The commands are:
-
-    save     list and copy dependencies into Godeps
-    go       run the go tool with saved dependencies
-    get      download and install packages with specified dependencies
-    path     print GOPATH for dependency code
-    restore  check out listed dependency versions in GOPATH
-    update   update selected packages or the go version
-    diff     shows the diff between current and previously saved set of dependencies
-    version  show version info
-
-Use "godep help [command]" for more information about a command.
-```
+- [dep installation](https://golang.github.io/dep/docs/installation.html)
