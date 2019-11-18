@@ -1,11 +1,11 @@
-# 包管理工具dep
+# 包管理工具 dep
 
-`Vendor`只是go官方提供的一个机制，但是包管理的问题依然没有解决，并且也没有对依赖进行版本管理。如果要实现上述的功能，还需要借助包管理工具。
+`Vendor`只是 go 官方提供的一个机制，但是包管理的问题依然没有解决，并且也没有对依赖进行版本管理。如果要实现上述的功能，还需要借助包管理工具。
 
-https://github.com/golang/go/wiki/PackageManagementTools
-https://github.com/golang/dep
+- https://github.com/golang/go/wiki/PackageManagementTools
+- https://github.com/golang/dep
 
-## dep源码安装
+## dep 源码安装
 
 ```bash
 go get -d -u github.com/golang/dep
